@@ -15,41 +15,46 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            scroll-behavior: smooth;
             overflow-y: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Circular avatar with glowing ring effect */
+        /* Circular avatar with soft glowing ring */
         .profile-glow {
             position: relative;
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            overflow: hidden;
+            overflow: visible;
         }
 
-        .profile-glow::before {
+        /* The glow layer */
+        .profile-glow::after {
             content: "";
             position: absolute;
-            inset: -5px;
+            inset: -10px;
             border-radius: 50%;
             background: conic-gradient(
                 from 0deg,
                 #FF00FF,
-                #00FFFF,
+                #9C59B2,
+                #0066CC,
                 #FF00FF
             );
-            filter: blur(10px);
             z-index: 0;
-            animation: spin 6s linear infinite;
+            filter: blur(18px);
+            opacity: 0.9;
+            animation: rotateGlow 8s linear infinite;
         }
 
-        @keyframes spin {
+        /* Rotation animation */
+        @keyframes rotateGlow {
             to {
                 transform: rotate(360deg);
             }
         }
 
+        /* Avatar itself */
         .profile-glow img {
             position: relative;
             z-index: 1;
@@ -57,6 +62,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.1);
         }
 
         .data-tag {
@@ -84,7 +90,7 @@
 
     <div class="flex flex-col items-center p-8 w-full max-w-lg">
 
-        <!-- PROFILE AVATAR with smooth circular glow -->
+        <!-- PROFILE AVATAR -->
         <div class="profile-glow mb-6">
             <img 
                 src="https://i.pinimg.com/1200x/e4/a4/74/e4a474eeaca44df2bebab2cb62f4a5a8.jpg" 
