@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maple Fool Profile</title>
-    <!-- Load Tailwind CSS for easy, responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 1. Core Aesthetic: Inter Font and Dark Gradient Background */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -20,27 +18,47 @@
             scroll-behavior: smooth;
             overflow-y: hidden;
         }
-        
-        /* Profile Picture Glow Effect */
+
+        /* Circular avatar with glowing ring effect */
         .profile-glow {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%; /* Make it perfectly circular */
-            border: 4px solid transparent;
-            border-image-slice: 1;
-            border-image-source: linear-gradient(to right, #FF00FF, #00FFFF);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5), 0 0 10px rgba(0, 255, 255, 0.5);
-            transition: all 0.3s ease;
-            overflow: hidden; /* Ensure the image fits perfectly inside */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .profile-glow:hover {
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8), 0 0 15px rgba(0, 255, 255, 0.8);
+            position: relative;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
         }
 
-        /* Data Tags Styling */
+        .profile-glow::before {
+            content: "";
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #FF00FF,
+                #00FFFF,
+                #FF00FF
+            );
+            filter: blur(10px);
+            z-index: 0;
+            animation: spin 6s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .profile-glow img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
         .data-tag {
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 9999px;
@@ -50,7 +68,6 @@
             color: #E5E7EB;
         }
 
-        /* Social Icon Hover */
         .social-icon-wrapper {
             transition: transform 0.2s ease-in-out;
         }
@@ -58,7 +75,6 @@
             transform: scale(1.1);
         }
 
-        /* Icons White Filter */
         .social-icon-filter {
             filter: invert(1);
         }
@@ -66,20 +82,18 @@
 </head>
 <body>
 
-    <!-- CENTRAL PROFILE CONTAINER -->
     <div class="flex flex-col items-center p-8 w-full max-w-lg">
 
-        <!-- PROFILE PICTURE / LOGO AREA -->
+        <!-- PROFILE AVATAR with smooth circular glow -->
         <div class="profile-glow mb-6">
             <img 
                 src="https://i.pinimg.com/1200x/e4/a4/74/e4a474eeaca44df2bebab2cb62f4a5a8.jpg" 
                 alt="Maple Fool Profile Picture" 
-                class="w-full h-full object-cover rounded-full"
                 onerror="this.onerror=null; this.src='https://placehold.co/160x160/2D3748/FFFFFF?text=AVATAR';"
             />
         </div>
-        
-        <!-- NAME (Colored with Bisexual Flag: Pink, Purple, Blue) -->
+
+        <!-- NAME -->
         <h1 class="text-5xl font-extrabold mb-4">
             <span style="color: #FF0080;">M</span>
             <span style="color: #9C59B2;">a</span>
@@ -101,30 +115,22 @@
             <span class="data-tag">Bisexual</span>
         </div>
 
-        <!-- SOCIAL MEDIA ICONS -->
+        <!-- SOCIAL ICONS -->
         <div class="flex space-x-6 items-center">
-            
-            <!-- Twitch -->
             <a href="https://twitch.tv/Maple_FooI" target="_blank" class="social-icon-wrapper" aria-label="Twitch">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" alt="Twitch" width="28" height="28" class="h-7 w-7 social-icon-filter">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" alt="Twitch" width="28" height="28" class="social-icon-filter">
             </a>
-
-            <!-- Discord -->
             <a href="https://discord.com/users/1008004953941491782" target="_blank" class="social-icon-wrapper" aria-label="Discord">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" width="28" height="28" class="h-7 w-7 social-icon-filter">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" width="28" height="28" class="social-icon-filter">
             </a>
-
-            <!-- YouTube -->
             <a href="https://youtube.com/@Maple_Fool" target="_blank" class="social-icon-wrapper" aria-label="YouTube">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" width="28" height="28" class="h-7 w-7 social-icon-filter">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" width="28" height="28" class="social-icon-filter">
             </a>
-
-            <!-- Steam -->
             <a href="https://steamcommunity.com/id/MapleFool/" target="_blank" class="social-icon-wrapper" aria-label="Steam">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" width="28" height="28" class="h-7 w-7 social-icon-filter">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" width="28" height="28" class="social-icon-filter">
             </a>
         </div>
-        
+
     </div>
 
 </body>
