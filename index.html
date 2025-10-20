@@ -6,10 +6,10 @@
     <title>Maple Fool Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Core Aesthetic */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            background: linear-gradient(135deg, #1C0C30 0%, #000000 100%);
             color: #FFFFFF;
             min-height: 100vh;
             display: flex;
@@ -17,44 +17,46 @@
             justify-content: center;
             overflow-y: hidden;
             scroll-behavior: smooth;
+            background: linear-gradient(135deg, #1C0C30 0%, #000000 100%);
+            background-size: 200% 200%;
+            animation: bgShift 20s ease-in-out infinite;
         }
 
-        /* Circular avatar with soft glowing ring */
+        /* Smooth animated background */
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Profile Glow */
         .profile-glow {
             position: relative;
             width: 180px;
             height: 180px;
             border-radius: 50%;
             overflow: visible;
+            animation: fadeIn 1s ease forwards;
         }
 
-        /* The glow layer */
+        /* Animated glowing ring */
         .profile-glow::after {
             content: "";
             position: absolute;
             inset: -10px;
             border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                #FF00FF,
-                #9C59B2,
-                #0066CC,
-                #FF00FF
-            );
+            background: conic-gradient(from 0deg, #FF00FF, #9C59B2, #0066CC, #FF00FF);
             z-index: 0;
             filter: blur(18px);
             opacity: 0.9;
             animation: rotateGlow 8s linear infinite;
         }
 
-        /* Rotation animation */
         @keyframes rotateGlow {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
 
-        /* Avatar itself */
+        /* Avatar */
         .profile-glow img {
             position: relative;
             z-index: 1;
@@ -65,6 +67,26 @@
             border: 3px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* Fade-in Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 1s ease forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Delay classes for staggered fade */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        /* Data Tags */
         .data-tag {
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 9999px;
@@ -74,11 +96,15 @@
             color: #E5E7EB;
         }
 
+        /* Social Icons */
         .social-icon-wrapper {
-            transition: transform 0.2s ease-in-out;
+            transition: transform 0.2s ease-in-out, filter 0.3s ease;
         }
         .social-icon-wrapper:hover {
-            transform: scale(1.1);
+            transform: scale(1.2);
+        }
+        .social-icon-wrapper:hover img {
+            filter: drop-shadow(0 0 8px #FF00FF) invert(1);
         }
 
         .social-icon-filter {
@@ -91,7 +117,7 @@
     <div class="flex flex-col items-center p-8 w-full max-w-lg">
 
         <!-- PROFILE AVATAR -->
-        <div class="profile-glow mb-6">
+        <div class="profile-glow mb-6 fade-in delay-1">
             <img 
                 src="https://i.pinimg.com/1200x/e4/a4/74/e4a474eeaca44df2bebab2cb62f4a5a8.jpg" 
                 alt="Maple Fool Profile Picture" 
@@ -100,7 +126,7 @@
         </div>
 
         <!-- NAME -->
-        <h1 class="text-5xl font-extrabold mb-4">
+        <h1 class="text-5xl font-extrabold mb-4 fade-in delay-2">
             <span style="color: #FF0080;">M</span>
             <span style="color: #9C59B2;">a</span>
             <span style="color: #0066CC;">p</span>
@@ -114,7 +140,7 @@
         </h1>
 
         <!-- DATA TAGS -->
-        <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <div class="flex flex-wrap justify-center gap-3 mb-10 fade-in delay-3">
             <span class="data-tag">18 years old</span>
             <span class="data-tag">Male</span>
             <span class="data-tag">they/them</span>
@@ -122,7 +148,7 @@
         </div>
 
         <!-- SOCIAL ICONS -->
-        <div class="flex space-x-6 items-center">
+        <div class="flex space-x-6 items-center fade-in delay-4">
             <a href="https://twitch.tv/Maple_FooI" target="_blank" class="social-icon-wrapper" aria-label="Twitch">
                 <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" alt="Twitch" width="28" height="28" class="social-icon-filter">
             </a>
