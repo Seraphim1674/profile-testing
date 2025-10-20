@@ -107,9 +107,16 @@
             filter: drop-shadow(0 0 8px #FF00FF) invert(1);
         }
 
-        .social-icon-filter {
-            filter: invert(1);
+        /* Glow effect on text */
+        .glowing-text {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF00FF, #9C59B2, #0066CC);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px rgba(255, 0, 255, 0.8), 0 0 10px rgba(255, 0, 255, 0.7), 0 0 15px rgba(255, 0, 255, 0.6), 0 0 20px rgba(255, 0, 255, 0.5);
         }
+
     </style>
 </head>
 <body>
@@ -126,17 +133,8 @@
         </div>
 
         <!-- NAME -->
-        <h1 class="text-5xl font-extrabold mb-4 fade-in delay-2">
-            <span style="color: #FF0080;">M</span>
-            <span style="color: #9C59B2;">a</span>
-            <span style="color: #0066CC;">p</span>
-            <span style="color: #FF0080;">l</span>
-            <span style="color: #9C59B2;">e</span>
-            &nbsp;
-            <span style="color: #0066CC;">F</span>
-            <span style="color: #FF0080;">o</span>
-            <span style="color: #9C59B2;">o</span>
-            <span style="color: #0066CC;">l</span>
+        <h1 class="glowing-text mb-4 fade-in delay-2">
+            Maple Fool
         </h1>
 
         <!-- DATA TAGS -->
