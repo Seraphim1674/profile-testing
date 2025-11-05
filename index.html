@@ -1,221 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maple Fool — Promised Consort of Miquella</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  /* === CORE === */
-  body {
-    margin: 0;
-    overflow: hidden;
-    height: 100vh;
-    font-family: 'Cinzel', 'Inter', serif;
-    color: #f9f7f0;
-    background: radial-gradient(circle at 50% 50%, #3e1c50 0%, #1a0b26 70%, #0a0310 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maple Fool Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Core Aesthetic */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #1C0C30 0%, #000000 100%);
+            background-size: 200% 200%;
+            animation: bgShift 20s ease-in-out infinite;
+        }
 
-  /* === BACKGROUND MOTION === */
-  body::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255,220,170,0.1) 0%, transparent 70%);
-    animation: aurora 18s ease-in-out infinite alternate;
-    mix-blend-mode: screen;
-  }
+        /* Smooth animated background */
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-  @keyframes aurora {
-    0% { transform: scale(1) translate(0, 0); opacity: 0.4; }
-    50% { transform: scale(1.2) translate(2%, 3%); opacity: 0.8; }
-    100% { transform: scale(1) translate(-2%, -3%); opacity: 0.4; }
-  }
+        /* Profile Glow */
+        .profile-glow {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: visible;
+            animation: fadeIn 1s ease forwards;
+        }
 
-  /* === STARFIELD === */
-  .star {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: radial-gradient(circle, rgba(255,247,220,1) 0%, transparent 70%);
-    border-radius: 50%;
-    opacity: 0.7;
-    animation: floatStar 9s ease-in-out infinite;
-    filter: blur(0.7px);
-  }
+        /* Animated glowing ring */
+        .profile-glow::after {
+            content: "";
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #FF00FF, #9C59B2, #0066CC, #FF00FF);
+            z-index: 0;
+            filter: blur(18px);
+            opacity: 0.9;
+            animation: rotateGlow 8s linear infinite;
+        }
 
-  @keyframes floatStar {
-    0% { transform: translateY(0) scale(1); opacity: 0.4; }
-    50% { transform: translateY(-25px) scale(1.2); opacity: 1; }
-    100% { transform: translateY(0) scale(1); opacity: 0.4; }
-  }
+        @keyframes rotateGlow {
+            to { transform: rotate(360deg); }
+        }
 
-  /* === MAIN CONTAINER === */
-  .sanctum {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    padding: 3rem 2rem;
-    backdrop-filter: blur(12px);
-    background: rgba(50, 20, 70, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    box-shadow: 0 0 50px rgba(250, 230, 180, 0.15);
-  }
+        /* Avatar */
+        .profile-glow img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
 
-  /* === HALO SIGIL === */
-  .halo {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border: 1px solid rgba(250, 230, 190, 0.25);
-    box-shadow: 0 0 25px rgba(255,240,200,0.15);
-    animation: rotateHalo 40s linear infinite;
-    z-index: 0;
-  }
+        /* Fade-in Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 1s ease forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-  @keyframes rotateHalo {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-  }
+        /* Delay classes for staggered fade */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; } /* New Subtitle */
+        .delay-4 { animation-delay: 0.8s; } /* Data Tags */
+        .delay-5 { animation-delay: 1.0s; } /* Social Icons */
 
-  /* === AVATAR === */
-  .avatar {
-    position: relative;
-    z-index: 2;
-    width: 180px;
-    height: 180px;
-    margin: 0 auto;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 35px rgba(255,220,200,0.5);
-  }
+        /* Data Tags */
+        .data-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #E5E7EB;
+        }
 
-  .avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+        /* Social Icons */
+        .social-icon-wrapper {
+            transition: transform 0.2s ease-in-out, filter 0.3s ease;
+        }
+        .social-icon-wrapper:hover {
+            transform: scale(1.2);
+        }
+        .social-icon-wrapper:hover img {
+            filter: drop-shadow(0 0 8px #FF00FF) invert(1);
+        }
 
-  /* === TEXT === */
-  h1 {
-    font-size: 3rem;
-    background: linear-gradient(90deg, #fff9db, #eac3ff, #ffd8e8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 0 15px rgba(255,220,180,0.3);
-  }
-
-  .title {
-    color: #f6e6b8;
-    font-style: italic;
-    letter-spacing: 1px;
-    opacity: 0.95;
-    margin-bottom: 1.5rem;
-    text-shadow: 0 0 10px #f5d2ff, 0 0 20px #cda0ff;
-  }
-
-  /* === TAGS === */
-  .tags {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-bottom: 2rem;
-  }
-
-  .tag {
-    background: rgba(255,255,255,0.08);
-    border-radius: 9999px;
-    padding: 6px 14px;
-    font-size: 0.85rem;
-    border: 1px solid rgba(255,255,255,0.15);
-    color: #fff9ea;
-    text-shadow: 0 0 6px rgba(255,255,255,0.3);
-  }
-
-  /* === GLYPHS === */
-  .glyphs {
-    display: flex;
-    justify-content: center;
-    gap: 1.2rem;
-    margin-top: 1rem;
-  }
-
-  .glyph {
-    font-size: 1.5rem;
-    opacity: 0.7;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    color: #fbe4bb;
-    text-shadow: 0 0 8px #ffebc4;
-  }
-
-  .glyph:hover {
-    transform: scale(1.3);
-    opacity: 1;
-    text-shadow: 0 0 15px #ffd8f5, 0 0 30px #fff9c6;
-  }
-
-  /* === LORE LINE === */
-  .lore {
-    margin-top: 1.5rem;
-    font-style: italic;
-    font-size: 0.95rem;
-    color: #f4eadd;
-    opacity: 0.9;
-    text-shadow: 0 0 8px rgba(255,255,255,0.3);
-  }
-
-</style>
+        .social-icon-filter {
+            filter: invert(1);
+        }
+        
+        /* Custom styling for the consort title */
+        .consort-title {
+            /* Changed shadow color from yellow to fuchsia/magenta */
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.7); 
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Stars -->
-  <div class="star" style="top:10%; left:20%; animation-delay:0s;"></div>
-  <div class="star" style="top:25%; left:70%; animation-delay:1s;"></div>
-  <div class="star" style="top:50%; left:15%; animation-delay:2s;"></div>
-  <div class="star" style="top:70%; left:80%; animation-delay:3s;"></div>
-  <div class="star" style="top:15%; left:45%; animation-delay:4s;"></div>
-  <div class="star" style="top:85%; left:30%; animation-delay:5s;"></div>
-  <div class="star" style="top:35%; left:90%; animation-delay:6s;"></div>
-  <div class="star" style="top:75%; left:55%; animation-delay:2.5s;"></div>
-  <div class="star" style="top:40%; left:10%; animation-delay:3.3s;"></div>
-  <div class="star" style="top:60%; left:65%; animation-delay:1.8s;"></div>
+    <div class="flex flex-col items-center p-8 w-full max-w-lg">
 
-  <!-- Sanctum -->
-  <div class="sanctum">
-    <div class="halo"></div>
-    <div class="avatar">
-      <img src="https://i.pinimg.com/736x/61/30/24/6130249f629959eecae65980eaf3381f.jpg" alt="Maple Fool Avatar">
+        <!-- PROFILE AVATAR -->
+        <div class="profile-glow mb-6 fade-in delay-1">
+            <img 
+                src="https://i.pinimg.com/736x/61/30/24/6130249f629959eecae65980eaf3381f.jpg" 
+                alt="Maple Fool Profile Picture" 
+                onerror="this.onerror=null; this.src='https://placehold.co/160x160/2D3748/FFFFFF?text=AVATAR';"
+            />
+        </div>
+
+        <!-- NAME -->
+        <h1 class="text-5xl font-extrabold mb-1 fade-in delay-2">
+            <span style="color: #FF0080;">M</span>
+            <span style="color: #9C59B2;">a</span>
+            <span style="color: #0066CC;">p</span>
+            <span style="color: #FF0080;">l</span>
+            <span style="color: #9C59B2;">e</span>
+            &nbsp;
+            <span style="color: #0066CC;">F</span>
+            <span style="color: #FF0080;">o</span>
+            <span style="color: #9C59B2;">o</span>
+            <span style="color: #0066CC;">l</span>
+        </h1>
+        
+        <!-- NEW TITLE/SUBTITLE - Corrected Grammar and Enhanced Styling -->
+        <p class="text-2xl text-center text-fuchsia-400 font-bold tracking-widest mb-8 fade-in delay-3 consort-title">
+            Promised Consort of Miquella
+        </p>
+
+        <!-- DATA TAGS -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10 fade-in delay-4">
+            <span class="data-tag">∞ years old</span>
+            <span class="data-tag">Male</span>
+            <span class="data-tag">they/them</span>
+            <span class="data-tag">Bisexual</span>
+            <!-- UPDATED THEMATIC TAGS -->
+            <span class="data-tag">Shadow of the Haligtree</span>
+            <span class="data-tag">Lord of Slumber</span>
+            <span class="data-tag">Dream Weaver</span>
+        </div>
+
+        <!-- SOCIAL ICONS -->
+        <div class="flex space-x-6 items-center fade-in delay-5">
+            <a href="https://twitch.tv/Maple_FooI" target="_blank" class="social-icon-wrapper" aria-label="Twitch">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" alt="Twitch" width="28" height="28" class="social-icon-filter">
+            </a>
+            <a href="https://discord.com/users/1008004953941491782" target="_blank" class="social-icon-wrapper" aria-label="Discord">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" width="28" height="28" class="social-icon-filter">
+            </a>
+            <a href="https://youtube.com/@Maple_Fool" target="_blank" class="social-icon-wrapper" aria-label="YouTube">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" width="28" height="28" class="social-icon-filter">
+            </a>
+            <a href="https://steamcommunity.com/id/MapleFool/" target="_blank" class="social-icon-wrapper" aria-label="Steam">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" width="28" height="28" class="social-icon-filter">
+            </a>
+        </div>
+
     </div>
-    <h1>Maple Fool</h1>
-    <div class="title">Promised Consort of Miquella</div>
-
-    <div class="tags">
-      <span class="tag">He/They</span>
-      <span class="tag">Bisexual</span>
-      <span class="tag">Eternal Dreamer</span>
-      <span class="tag">Gracebound</span>
-    </div>
-
-    <div class="glyphs">
-      <a href="https://twitch.tv/Maple_FooI" class="glyph" title="Twitch">☾</a>
-      <a href="https://discord.com/users/1008004953941491782" class="glyph" title="Discord">✶</a>
-      <a href="https://youtube.com/@Maple_Fool" class="glyph" title="YouTube">☼</a>
-      <a href="https://steamcommunity.com/id/MapleFool/" class="glyph" title="Steam">✵</a>
-    </div>
-
-    <p class="lore">“And in his light, I found endless dawn — the promise of a golden dream.”</p>
-  </div>
 
 </body>
 </html>
