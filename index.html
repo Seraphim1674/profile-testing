@@ -5,86 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maple Fool Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Core Aesthetic */
+        /* Core Aesthetic - Updated to MLM palette */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             margin: 0;
-            color: #FFFFFF;
+            color: #4A4A4A;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden; 
-            scroll-behavior: smooth;
-            background: linear-gradient(135deg, #1C0C30 0%, #000000 100%);
-            background-size: 200% 200%;
-            animation: bgShift 20s ease-in-out infinite;
+            /* Gradient transition from MLM Teal to Deep Blue */
+            background: linear-gradient(135deg, #078975 0%, #FFFFFF 50%, #3D1A78 100%);
+            background-size: 400% 400%;
+            animation: softGradient 15s ease infinite;
         }
 
-        /* Smooth animated background */
-        @keyframes bgShift {
+        /* Floating Background Particles */
+        .bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -50px;
+            animation: floatUp 15s infinite linear;
+            opacity: 0.6;
+            font-size: 24px;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes softGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
         
-        /* Profile Glow */
-        .profile-glow {
+        .profile-wrapper {
+            border-radius: 40px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Profile Container */
+        .profile-container {
             position: relative;
-            width: 190px; 
-            height: 190px; 
-            border-radius: 50%;
+            width: 180px; 
+            height: 180px; 
             animation: fadeIn 1s ease forwards;
-            transition: transform 0.3s ease-out; 
         }
 
-        /* Animated glowing ring */
-        .profile-glow::after {
-            content: "";
+        /* Cute pulsing ring - Updated to MLM Teal */
+        .profile-ring {
             position: absolute;
-            inset: -15px;
+            inset: -8px;
             border-radius: 50%;
-            background: conic-gradient(from 0deg, #FF00FF, #9C59B2, #0066CC, #FF00FF);
-            z-index: 0;
-            filter: blur(18px);
-            opacity: 0.9;
-            animation: rotateGlow 8s linear infinite;
-            transition: inset 0.3s ease-out, filter 0.3s ease-out; 
+            border: 4px dashed #26CEAA;
+            animation: spinSlow 20s linear infinite;
         }
 
-        /* Hover effect for Profile Glow */
-        .profile-glow:hover::after {
-            inset: -30px; 
-            filter: blur(28px); 
+        .profile-glow-bg {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(38,206,170,0.4) 0%, rgba(80,73,204,0) 70%);
+            filter: blur(10px);
+            animation: pulse 3s infinite ease-in-out;
         }
 
-        @keyframes rotateGlow {
+        @keyframes spinSlow {
             to { transform: rotate(360deg); }
         }
 
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
         /* Avatar */
-        .profile-glow img {
-            position: relative;
-            z-index: 1;
+        .avatar-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease-out; 
+            border: 4px solid #FFFFFF;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 2;
         }
 
-        /* PFP scales up on hover */
-        .profile-glow:hover img {
-            transform: scale(1.05);
+        .profile-container:hover .avatar-img {
+            transform: scale(1.1) rotate(5deg);
         }
 
         /* Fade-in Animation */
         .fade-in {
             opacity: 0;
             transform: translateY(10px);
-            animation: fadeIn 1s ease forwards;
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
         @keyframes fadeIn {
             to {
@@ -93,92 +129,138 @@
             }
         }
 
-        /* Delay classes for staggered fade */
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
 
-        /* Data Tags */
+        /* Data Tags - Colors updated to Teal/Blue */
         .data-tag {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 9999px;
-            padding: 4px 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #E5E7EB;
+            background-color: #FFFFFF;
+            border: 2px solid #26CEAA;
+            color: #7a7a7a;
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            font-weight: 700;
             cursor: default; 
-            transition: transform 0.2s ease-in-out, box-shadow 0.3s ease, background-color 0.3s ease; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 2px 5px rgba(38, 206, 170, 0.1);
         }
         
-        /* Hover effect for Data Tags */
         .data-tag:hover {
-            transform: scale(1.05); 
-            background-color: rgba(255, 255, 255, 0.15); 
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.7); 
+            transform: translateY(-3px) scale(1.05); 
+            background-color: #26CEAA;
+            color: white;
+            box-shadow: 0 5px 15px rgba(38, 206, 170, 0.4); 
+        }
+
+        .tag-special {
+            border-color: #5049CC;
+        }
+        .tag-special:hover {
+            background-color: #5049CC;
+            box-shadow: 0 5px 15px rgba(80, 73, 204, 0.4);
         }
 
         /* Social Icons */
         .social-icon-wrapper {
-            transition: transform 0.2s ease-in-out, filter 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .social-icon-wrapper:hover {
-            transform: scale(1.2);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 15px rgba(38, 206, 170, 0.3);
         }
+        
+        .social-icon-filter {
+            filter: invert(30%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(90%);
+            transition: filter 0.3s ease;
+        }
+        
+        .social-icon-wrapper:hover .social-icon-filter {
+            filter: none;
+        }
+        
         .social-icon-wrapper:hover img {
-            /* Glow effect while keeping the icon white */
-            filter: invert(1) drop-shadow(0 0 8px #FF00FF); 
+            /* Changed social hover color to match MLM Blue */
+            filter: invert(31%) sepia(54%) saturate(2333%) hue-rotate(224deg) brightness(92%) contrast(100%);
         }
 
-        .social-icon-filter {
-            filter: invert(1); 
-        }
     </style>
 </head>
 <body>
-    <div class="flex flex-col items-center p-8 w-full max-w-lg">
 
-        <!-- PROFILE AVATAR --><div class="profile-glow mb-6 fade-in delay-1">
+    <div class="bg-particles">
+        <!-- Swapped hearts for Blue/Green themed emojis -->
+        <div class="particle" style="left: 10%; animation-duration: 12s; animation-delay: 0s;">💙</div>
+        <div class="particle" style="left: 30%; animation-duration: 15s; animation-delay: 2s;">✨</div>
+        <div class="particle" style="left: 50%; animation-duration: 10s; animation-delay: 5s;">🌿</div>
+        <div class="particle" style="left: 70%; animation-duration: 14s; animation-delay: 1s;">💠</div>
+        <div class="particle" style="left: 90%; animation-duration: 16s; animation-delay: 4s;">🌊</div>
+    </div>
+
+    <div class="profile-wrapper flex flex-col items-center p-10 w-full max-w-lg mx-4">
+
+        <!-- PROFILE AVATAR -->
+        <div class="profile-container mb-6 fade-in delay-1">
+            <div class="profile-glow-bg"></div>
+            <div class="profile-ring"></div>
             <img 
-                src="https://i.pinimg.com/736x/61/30/24/6130249f629959eecae65980eaf3381f.jpg" 
+                class="avatar-img"
+                src="https://i.pinimg.com/1200x/ac/73/47/ac7347dea0b4f937502e765a95b09e99.jpg" 
                 alt="Maple Fool Profile Picture" 
-                onerror="this.onerror=null; this.src='https://placehold.co/160x160/2D3748/FFFFFF?text=AVATAR';"
+                onerror="this.onerror=null; this.src='https://placehold.co/160x160/26CEAA/FFFFFF?text=Error';"
             />
         </div>
 
-        <!-- NAME --><h1 class="text-5xl font-extrabold mb-4 fade-in delay-2">
-            <span style="color: #FF0080;">M</span>
-            <span style="color: #9C59B2;">a</span>
-            <span style="color: #0066CC;">p</span>
-            <span style="color: #FF0080;">l</span>
-            <span style="color: #9C59B2;">e</span>
+        <!-- NAME - Updated with MLM colors: Dark Green, Teal, Blue, Deep Blue -->
+        <h1 class="text-5xl font-extrabold mb-4 fade-in delay-2 tracking-wide text-center">
+            <span style="color: #078975; text-shadow: 2px 2px 0px #FFFFFF;">M</span>
+            <span style="color: #26CEAA; text-shadow: 2px 2px 0px #FFFFFF;">a</span>
+            <span style="color: #7BADE2; text-shadow: 2px 2px 0px #FFFFFF;">p</span>
+            <span style="color: #5049CC; text-shadow: 2px 2px 0px #FFFFFF;">l</span>
+            <span style="color: #3D1A78; text-shadow: 2px 2px 0px #FFFFFF;">e</span>
             &nbsp;
-            <span style="color: #0066CC;">F</span>
-            <span style="color: #FF0080;">o</span>
-            <span style="color: #9C59B2;">o</span>
-            <span style="color: #0066CC;">l</span>
+            <span style="color: #078975; text-shadow: 2px 2px 0px #FFFFFF;">F</span>
+            <span style="color: #26CEAA; text-shadow: 2px 2px 0px #FFFFFF;">o</span>
+            <span style="color: #7BADE2; text-shadow: 2px 2px 0px #FFFFFF;">o</span>
+            <span style="color: #5049CC; text-shadow: 2px 2px 0px #FFFFFF;">l</span>
+            <span class="text-2xl align-top">✨</span>
         </h1>
 
-        <!-- DATA TAGS --><div class="flex flex-wrap justify-center gap-3 mb-10 fade-in delay-3">
+        <!-- DATA TAGS -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10 fade-in delay-3 max-w-md">
             <span class="data-tag">∞ years old</span>
-            <span class="data-tag">Male</span>
+            <span class="data-tag tag-special">Male</span>
             <span class="data-tag">they/them</span>
-            <span class="data-tag">Bisexual</span>
-            <span class="data-tag">Promised Consort of Miquella</span> 
+            <!-- Updated to "Gay" with MLM Linear Gradient -->
+            <span class="data-tag" style="background: linear-gradient(90deg, #078975, #26CEAA, #FFFFFF, #7BADE2, #3D1A78); color: #333; border: none; font-weight: 800; text-shadow: 0px 0px 2px white;">Gay</span>
+            <span class="data-tag tag-special">💙 Femboy 💙</span> 
         </div>
 
-        <!-- SOCIAL ICONS --><div class="flex space-x-6 items-center fade-in delay-4">
-            <a href="https://twitch.tv/Maple_FooI" target="_blank" class="social-icon-wrapper" aria-label="Twitch">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" alt="Twitch" width="28" height="28" class="social-icon-filter">
+        <!-- SOCIAL ICONS -->
+        <div class="flex flex-wrap justify-center gap-6 items-center fade-in delay-4">
+            <a href="https://www.twitch.tv/maple_fools" target="_blank" class="social-icon-wrapper" aria-label="Twitch">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" alt="Twitch" width="24" height="24" class="social-icon-filter">
             </a>
             <a href="https://discord.com/users/1008004953941491782" target="_blank" class="social-icon-wrapper" aria-label="Discord">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" width="28" height="28" class="social-icon-filter">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" width="24" height="24" class="social-icon-filter">
+            </a>
+            <a href="https://www.roblox.com/users/1005562027/profile" target="_blank" class="social-icon-wrapper" aria-label="Roblox">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/roblox.svg" alt="Roblox" width="24" height="24" class="social-icon-filter">
             </a>
             <a href="https://youtube.com/@Maple_Fool" target="_blank" class="social-icon-wrapper" aria-label="YouTube">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" width="28" height="28" class="social-icon-filter">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" width="24" height="24" class="social-icon-filter">
             </a>
             <a href="https://steamcommunity.com/id/MapleFool/" target="_blank" class="social-icon-wrapper" aria-label="Steam">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" width="28" height="28" class="social-icon-filter">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" width="24" height="24" class="social-icon-filter">
             </a>
         </div>
 
